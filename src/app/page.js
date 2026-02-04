@@ -47,7 +47,7 @@ export default function Home() {
                 <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
                     <motion.div style={{ opacity: nameOpacity, scale: nameScale, filter: nameBlur }} className="text-center z-10">
                         <h1 className="text-[12vw] md:text-[10vw] font-black tracking-tighter leading-[0.8] text-white uppercase italic">
-                            ABHAY <br/> <span className="text-neutral-600 not-italic">SURYA</span>
+                            ABHAY <br/> <span className="text-neutral-600 not-italic">SURYA K S</span>
                         </h1>
                         <motion.div className="absolute bottom-[-25vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
                             <p className="text-[10px] tracking-[0.6em] text-cyan-500 uppercase font-bold animate-pulse">Scroll to reveal</p>
@@ -154,4 +154,5 @@ export default function Home() {
             </section>
         </main>
     );
+
 }
