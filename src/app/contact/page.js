@@ -14,37 +14,47 @@ export default function Contact() {
     const [sent, setSent] = useState(false);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        
+    if (e) e.preventDefault(); 
+    if (loading) return; 
+    
+    setLoading(true);
+    
         try {
-            const { error } = await supabase.from("messages").insert([formData]);
-            if (error) toast.error("Failed to save message. Please try again later.");
+            const { error: dbError } = await supabase.from("messages").insert([formData]);
+            
+            if (dbError) {
+                toast.error("Database Failure Occured. Please try later");
+                setLoading(false);
+                return; 
+            }
+            const templateParams = {
+                from_email: formData.email,
+                subject: formData.subject,
+                message: formData.description,
+                to_email: process.env.NEXT_PUBLIC_MY_EMAIL_ID
+            };
             await emailjs.send(
                 process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, 
                 process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-                {
-                    from_email: formData.email,
-                    subject: formData.subject,
-                    message: formData.description,
-                    to_email: process.env.NEXT_PUBLIC_MY_EMAIL_ID
-                },
+                templateParams,
                 process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
             );
             setSent(true);
+            toast.success("Message sent successfully!");
+    
             setTimeout(() => {
                 setIsFormOpen(false);
                 setSent(false);
                 setFormData({ email: "", subject: "", description: "" });
-                toast.success("Message sent successfully!");
             }, 2000);
-        } catch {
-            toast.error("Failed to send message. Please try again later.");
+    
+        } catch (err) {
+            console.error("EmailJS Error:", err);
+            toast.error("Failed to send email. Please check your connection.");
         } finally {
             setLoading(false);
         }
     };
-
     return (
         <main className="min-h-screen w-full bg-neutral-950 text-neutral-300 selection:bg-neutral-900/30 relative overflow-x-hidden font-sans">
             <Navbar />
@@ -171,9 +181,9 @@ export default function Contact() {
                                 <input type="text" placeholder="Subject" className="contact-input" value={formData.subject} onChange={e => setFormData({...formData, subject: e.target.value})} required />
                                 <textarea placeholder="How can I help you?" className="contact-input h-32 resize-none" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
                                 <button 
-                                    disabled={loading} 
+                                    type="submit"
+                                    disabled={loading || sent} 
                                     className="w-full py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.5em] hover:bg-cyan-500 transition-all rounded-2xl"
-                                    onClick={handleSubmit}
                                 >
                                     {sent ? "Sent Successfully" : loading ? "Sending..." : "Send Message"}
                                 </button>
