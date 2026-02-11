@@ -50,7 +50,7 @@ export default function Contact() {
     
         } catch (err) {
             console.error("EmailJS Error:", err);
-            toast.error("Failed to send email. Please check your connection.");
+            toast.error("Failed to send email. Please try later.");
         } finally {
             setLoading(false);
         }
@@ -200,3 +200,4 @@ export default function Contact() {
         </main>
     );
 }
+
