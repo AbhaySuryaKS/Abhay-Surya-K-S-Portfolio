@@ -34,6 +34,7 @@ export default function Home() {
         { name: "Skills", href: "/skills", desc: "Technical proficiency" },
         { name: "Projects", href: "/projects", desc: "Production-ready works" },
         { name: "Certificates", href: "/certificates", desc: "Verified achievements" },
+        { name: "Contacts", href: "/contact", desc: "Get in touch" },
     ];
 
     return (
@@ -156,3 +157,4 @@ export default function Home() {
     );
 
 }
+
