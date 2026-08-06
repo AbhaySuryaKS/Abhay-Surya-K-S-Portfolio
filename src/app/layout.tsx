@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Bebas_Neue, Inter, Allura } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "../components/Navbar"
+import { Analytics } from "@vercel/analytics/next"
 
 const bebas = Bebas_Neue({ subsets: ["latin"], variable: "--font-bebas", weight: "400" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-background font-body text-white antialiased">
         {children}
         <Navbar />
+        <Analytics />
       </body>
     </html>
   )
