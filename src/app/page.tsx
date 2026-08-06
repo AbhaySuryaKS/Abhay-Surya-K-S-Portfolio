@@ -358,9 +358,25 @@ export default function HomePage() {
   const socialLinks = data.links.filter((l) => !l.name.toLowerCase().includes("gmail"))
   const reachOutHref = gmailLink?.value ? `mailto:${gmailLink.value}` : "#"
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Abhay Surya K S',
+    url: 'https://abhay-surya-k-s-portfolio.vercel.app',
+    jobTitle: data.role || "Full-Stack Developer",
+    sameAs: [
+      'https://github.com/AbhaySuryaKS',
+      'https://linkedin.com/in/abhay-surya-k-s/',
+    ],
+  };
+
   return (
     <main className="relative w-full bg-[#050505] overflow-hidden">
       {/* ── ABOUT / HERO SECTION ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div
         ref={heroContainerRef}
         className="relative w-full min-h-[220vh] bg-[#050505] overflow-hidden"
