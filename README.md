@@ -63,7 +63,9 @@ portfolio/
 │   │   ├── layout.tsx
 │   │   ├── loading.tsx
 │   │   ├── not-found.tsx
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── robots.ts
+│   │   └── sitemap.ts
 │   ├── components/
 |   |   ├── Navbar.tsx
 │   └── lib/
