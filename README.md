@@ -68,10 +68,11 @@ portfolio/
 │   │   └── sitemap.ts
 │   ├── components/
 |   |   ├── Navbar.tsx
-│   └── lib/
-│       ├── auth-client.ts
-|       ├── auth.ts
-│       └── db.ts
+│   ├── lib/
+│   |   ├── auth-client.ts
+|   |   ├── auth.ts
+│   |   └── db.ts
+|   └── proxy.ts
 ├── next.config.ts
 ├── package.json
 └── tsconfig.json
